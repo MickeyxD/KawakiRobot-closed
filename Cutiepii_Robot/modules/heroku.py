@@ -146,7 +146,7 @@ async def dyno_usage(dyno):
         "Authorization": f"Bearer {HEROKU_API_KEY}",
         "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
-    path = "/accounts/" + user_id + "/actions/get-quota"
+    path = f"/accounts/{user_id}/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
         return await die.edit(
@@ -213,8 +213,5 @@ def indentitems(items, indent, level):
         else:
             islast = (i == len(items) - 1)
             # no new line character after the last rendered line
-            if level == 0 and islast:
-                res += indentstr + item
-            else:
-                res += indentstr + item + "\n"
+            res += indentstr + item if level == 0 and islast else indentstr + item + "\n"
     return res

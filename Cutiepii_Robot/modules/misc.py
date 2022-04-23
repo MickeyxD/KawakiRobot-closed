@@ -127,10 +127,10 @@ def rmemes(update, context):
         return
     res = res.json()
 
-    rpage = res.get(str("subreddit"))  # Subreddit
-    title = res.get(str("title"))  # Post title
-    memeu = res.get(str("url"))  # meme pic url
-    plink = res.get(str("postLink"))
+    rpage = res.get("subreddit")
+    title = res.get("title")
+    memeu = res.get("url")
+    plink = res.get("postLink")
 
     caps = f"× <b>Title</b>: {title}\n"
     caps += f"× <b>Subreddit:</b> <pre>r/{rpage}</pre>"

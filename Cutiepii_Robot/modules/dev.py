@@ -62,7 +62,7 @@ def leave_cb(update: Update, context: CallbackContext):
 def allow_groups(update: Update, context: CallbackContext):
     args = context.args
     if not args:
-        state = "Lockdown is " + "on" if not Cutiepii_Robot.ALLOW_CHATS else "off"
+        state = "off" if Cutiepii_Robot.ALLOW_CHATS else "Lockdown is " + "on"
         update.effective_message.reply_text(f"Current state: {state}")
         return
     if args[0].lower() in ["off", "no"]:
@@ -135,8 +135,7 @@ def pip_install(update: Update, context: CallbackContext):
         stdout, stderr = process.communicate()
         reply = ""
         stderr = stderr.decode()
-        stdout = stdout.decode()
-        if stdout:
+        if stdout := stdout.decode():
             reply += f"*Stdout*\n`{stdout}`\n"
         if stderr:
             reply += f"*Stderr*\n`{stderr}`\n"
@@ -147,8 +146,7 @@ def pip_install(update: Update, context: CallbackContext):
 @dev_plus
 def leave(update: Update, context: CallbackContext):
     bot = context.bot
-    args = context.args
-    if args:
+    if args := context.args:
         chat_id = str(args[0])
         leave_msg = " ".join(args[1:])
         try:
